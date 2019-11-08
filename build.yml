@@ -1,0 +1,8 @@
+version: "3.5"
+services:
+  project:
+    build:
+      context: ./Account.Service
+      dockerfile: build.Dockerfile
+    volumes:
+      - ./Account.Service:/app

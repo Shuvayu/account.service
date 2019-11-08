@@ -1,0 +1,10 @@
+version: "3.5"
+services:
+  project:
+    build:
+      context: ./Account.Service
+      dockerfile: run.Dockerfile
+    ports:
+      - 5000:80
+    volumes:
+      - ./Account.Service/src/Account.Service.Api:/app
