@@ -1,6 +1,6 @@
 version: "3.5"
 services:
-  project:
+  api:
     build:
       context: ./Account.Service
       dockerfile: run.Dockerfile
@@ -8,3 +8,10 @@ services:
       - 5000:80
     volumes:
       - ./Account.Service/src/Account.Service.Api:/app
+    depends_on:
+      - db
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
+    environment:
+      SA_PASSWORD: "tsn3CgHMYr5jWYbE"
+      ACCEPT_EULA: "Y"

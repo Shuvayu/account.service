@@ -1,15 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Account.Service.Api.Controllers.v1;
+using Account.Service.Application.Common.Query;
+using Account.Service.Application.User.Model;
+using Account.Service.Application.User.Query.GetAllUsers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
-namespace Account.Service.Api.Controllers
+namespace Account.Service.Api.v1.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class UserController : ControllerBase
+    public class UserController : BaseController
     {
         private readonly ILogger<UserController> _logger;
 
@@ -18,10 +19,18 @@ namespace Account.Service.Api.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("{id}", Name = "Get")]
+        public async Task<IActionResult> GetAsync(int id)
         {
-          return Ok("Get From User");
+            var query = new GetQuery<UserDto> { Id = id };
+            return Ok(await Mediator.Send(query));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsync()
+        {
+            var query = new GetAllUserQuery();
+            return Ok(await Mediator.Send(query));
         }
     }
 }
