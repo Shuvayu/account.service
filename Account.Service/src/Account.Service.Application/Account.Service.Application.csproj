@@ -13,8 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Account\Command\" />
-    <Folder Include="Account\Command\CreateAccount\" />
     <Folder Include="Common\Command\" />
   </ItemGroup>
 

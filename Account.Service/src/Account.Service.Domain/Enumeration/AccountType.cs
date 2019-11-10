@@ -3,6 +3,6 @@
     public enum AccountType
     {
         Personal = 1,
-        Bussiness = 2,
+        Business = 2,
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Account.Service.Application.User.Model
+﻿using System;
+
+namespace Account.Service.Application.User.Model
 {
     public class UserDto
     {

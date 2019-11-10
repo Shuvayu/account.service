@@ -24,7 +24,7 @@ namespace Account.Service.Application.User.Query.GetUser
         }
         public async Task<UserDto> Handle(GetQuery<UserDto> request, CancellationToken cancellationToken)
         {
-            var user = await _context.User.Where(x => x.UserId == request.Id).FirstOrDefaultAsync();
+            var user = await _context.User.Where(x => x.UserId == request.Id && x.IsActive == true).FirstOrDefaultAsync();
             if (user == null)
             {
                 throw new NotFoundException(nameof(User), request.Id);

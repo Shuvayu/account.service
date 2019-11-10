@@ -1,4 +1,5 @@
-﻿using Account.Service.Application.User.Model;
+﻿using Account.Service.Application.Common.Exceptions;
+using Account.Service.Application.User.Model;
 using Account.Service.Persistence;
 using AutoMapper;
 using MediatR;
@@ -23,11 +24,14 @@ namespace Account.Service.Application.User.Command.CreateUser
 
         public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
+            // TODO : Add Duplicate Detection
+
             var userToAdd = _mapper.Map<Domain.Entities.User>(request);
             _context.User.Add(userToAdd);
             await _context.SaveChangesAsync();
-            var user = await _context.User.Where(x => x.Email == request.Email).FirstOrDefaultAsync();
-            return _mapper.Map<UserDto>(user);
+            
+            var userFound = await _context.User.Where(x => x.Email == request.Email).FirstOrDefaultAsync();
+            return _mapper.Map<UserDto>(userFound);
         }
     }
 }

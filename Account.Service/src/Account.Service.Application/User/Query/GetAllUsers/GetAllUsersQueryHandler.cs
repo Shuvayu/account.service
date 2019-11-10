@@ -25,7 +25,7 @@ namespace Account.Service.Application.User.Query.GetAllUsers
 
         public async Task<List<UserDto>> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
         {
-            var userList = await _context.User.ToListAsync();
+            var userList = await _context.User.Where(u => u.IsActive == true).ToListAsync();
             return _mapper.Map<List<UserDto>>(userList);
         }
     }

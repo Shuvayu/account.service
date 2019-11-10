@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="User\Command\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Shouldly" Version="3.0.2" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Account.Service.Application\Account.Service.Application.csproj" />
+    <ProjectReference Include="..\Account.Service.Domain\Account.Service.Domain.csproj" />
+    <ProjectReference Include="..\Account.Service.Persistence\Account.Service.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

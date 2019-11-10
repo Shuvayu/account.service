@@ -4,6 +4,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,6 +27,7 @@ namespace Account.Service.Application.Account.Query.GetAllAccounts
             var accountList = await _context
                                         .Account
                                         .Include(inc => inc.User)
+                                        .Where(x => x.IsActive == true)
                                         .ToListAsync();
             return _mapper.Map<List<AccountDto>>(accountList);
         }

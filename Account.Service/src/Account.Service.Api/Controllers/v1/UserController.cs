@@ -1,4 +1,3 @@
-using Account.Service.Api.Controllers.v1;
 using Account.Service.Application.Common.Query;
 using Account.Service.Application.User.Command.CreateUser;
 using Account.Service.Application.User.Model;
@@ -8,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace Account.Service.Api.v1.Controllers
+namespace Account.Service.Api.Controllers.v1
 {
     [ApiController]
     [Route("api/v1/[controller]")]
