@@ -9,6 +9,6 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg
 
 VOLUME /app
-WORKDIR /app
+WORKDIR /app/Account.Service.Api
 
 CMD dotnet watch run --urls http://0.0.0.0:80

@@ -1,12 +1,10 @@
-﻿namespace Account.Service.Application.User.Model
-{
-    public class UserDto
-    {
-        /// <summary>
-        /// Gets or sets the user id
-        /// </summary>
-        public int UserId { get; set; }
+﻿using Account.Service.Application.User.Model;
+using MediatR;
 
+namespace Account.Service.Application.User.Command.CreateUser
+{
+    public class CreateUserCommand : IRequest<UserDto>
+    {
         /// <summary>
         /// Gets or sets the name
         /// </summary>

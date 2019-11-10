@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Account.Service.Application\Account.Service.Application.csproj" />
+    <ProjectReference Include="..\Account.Service.Common\Account.Service.Common.csproj" />
+    <ProjectReference Include="..\Account.Service.Persistence\Account.Service.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

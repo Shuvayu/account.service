@@ -1,13 +1,17 @@
 using Account.Service.Application.User.Query.GetUser;
+using Account.Service.Common;
+using Account.Service.Persistence;
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 using System.Reflection;
 
 namespace Account.Service.Api
@@ -29,6 +33,16 @@ namespace Account.Service.Api
 
             services.AddMvc()
                 .AddFluentValidation(v => v.RegisterValidatorsFromAssemblyContaining(assemblyServiceType));
+
+            services.AddDbContext<AccountDbContext>(options => 
+            options.UseSqlServer(Configuration.GetConnectionString(Constants.CONNECTIONSTRING_NAME),
+                sqlServerOptionsAction: sqlOptions =>
+                {
+                    sqlOptions.EnableRetryOnFailure(
+                    maxRetryCount: 10,
+                    maxRetryDelay: TimeSpan.FromSeconds(30),
+                    errorNumbersToAdd: null);
+                }));
 
             services.AddSwaggerGen(c =>
             {
@@ -52,7 +66,7 @@ namespace Account.Service.Api
 
             app.UseSwagger();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
