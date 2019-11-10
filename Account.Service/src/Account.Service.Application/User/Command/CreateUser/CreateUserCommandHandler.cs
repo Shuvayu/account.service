@@ -24,8 +24,19 @@ namespace Account.Service.Application.User.Command.CreateUser
 
         public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            // TODO : Add Duplicate Detection
+            var existingUserFound = await _context.User.Where(x => x.Email == request.Email).FirstOrDefaultAsync();
 
+            if (existingUserFound != null)
+            {
+                throw new DuplicateException(nameof(User),request.Email);
+            }
+
+            var availableCredit = request.MonthlySalary - request.MonthlyExpenses;
+
+            if (availableCredit < 1000) {
+                throw new BusinessException("User cannot be created due lack of avaliable credit.");
+            }
+            
             var userToAdd = _mapper.Map<Domain.Entities.User>(request);
             _context.User.Add(userToAdd);
             await _context.SaveChangesAsync();
