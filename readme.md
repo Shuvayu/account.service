@@ -10,6 +10,8 @@ docker-compose -f run.yml up --build
 
 Then navigate to localhost:5000 for swagger ui
 
+## Release Setup (WIP)
+
 To build a release image, run (Still needs work to be done):
 
 ```bash
